@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <groupId>org.knowhowlab.osgi.shell</groupId>
+    <artifactId>knopflerfish</artifactId>
+    <version>1.1.1-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+    <name>KnowHowLab OSGi Shell - Knopflerfish console adapter</name>
+    <description>KnowHowLab OSGi Shell - Knopflerfish console adapter</description>
+    <url>http://knowhowlab.org</url>
+
+    <developers>
+        <developer>
+            <name>Dmytro Pishchukhin</name>
+            <timezone>GMT+1</timezone>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Know-How Lab</name>
+        <url>http://knowhowlab.org</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>Google</system>
+        <url>http://code.google.com/p/osgilab/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>https://osgilab.googlecode.com/svn/trunk/org.knowhowlab.osgi/shell/knopflerfish</url>
+        <connection>scm:svn:https://osgilab.googlecode.com/svn/trunk/org.knowhowlab.osgi/shell/knopflerfish</connection>
+        <developerConnection>scm:svn:https://osgilab.googlecode.com/svn/trunk/org.knowhowlab.osgi/shell/knopflerfish
+        </developerConnection>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.knopflerfish.bundle</groupId>
+            <artifactId>console-API</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>2.0.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Activator>org.knowhowlab.osgi.shell.knopflerfish.Activator</Bundle-Activator>
+                        <Bundle-License>http://code.google.com/p/osgilab/wiki/License</Bundle-License>
+                        <Bundle-RequiredExecutionEnvironment>J2SE-1.5</Bundle-RequiredExecutionEnvironment>
+                        <_removeheaders>Bnd-LastModified, Built-By, Private-Package, Tool, Build-Jdk, Include-Resource
+                        </_removeheaders>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <tagBase>https://osgilab.googlecode.com/svn/tags/</tagBase>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>Knopflerfish Repo</id>
+            <url>http://www.knopflerfish.org/maven2/</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.0</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.knowhowlab.osgi</groupId>
+    <artifactId>shell</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>KnowHowLab OSGi Shell adapters</name>
+    <description>KnowHowLab OSGi Shell adapters</description>
+    <url>http://knowhowlab.org</url>
+
+    <developers>
+        <developer>
+            <name>Dmytro Pishchukhin</name>
+            <timezone>GMT+1</timezone>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Know-How Lab</name>
+        <url>http://knowhowlab.org</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <modules>
+        <module>equinox</module>
+        <module>felix</module>
+        <module>felix-gogo</module>
+        <module>knopflerfish</module>
+    </modules>
+</project>
