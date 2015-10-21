@@ -76,18 +76,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>MIP Deps Repo</name>
-            <url>http://fkfmip-202v.linux.rz.db.de:8081/content/groups/mip/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-        </repository>
-    </repositories>
 </project>
