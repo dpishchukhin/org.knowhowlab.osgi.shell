@@ -6,10 +6,11 @@
 
     <groupId>org.knowhowlab.osgi</groupId>
     <artifactId>shell</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>KnowHowLab OSGi Shell adapters</name>
     <description>KnowHowLab OSGi Shell adapters</description>
+
     <url>http://knowhowlab.org</url>
 
     <developers>
@@ -31,10 +32,56 @@
         </license>
     </licenses>
 
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/knowhowlab/org.knowhowlab.osgi.shell/issues</url>
+    </issueManagement>
+
+    <scm>
+        <url>scm:git:git@github.com:knowhowlab/org.knowhowlab.osgi.shell.git</url>
+        <connection>scm:git:git@github.com:knowhowlab/org.knowhowlab.osgi.shell.git</connection>
+        <developerConnection>scm:git:git@github.com:knowhowlab/org.knowhowlab.osgi.shell.git</developerConnection>
+    </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>4.0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <modules>
         <module>equinox</module>
         <module>felix</module>
         <module>felix-gogo</module>
         <module>knopflerfish</module>
     </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.5</source>
+                        <target>1.5</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.0.1</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

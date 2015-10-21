@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <groupId>org.knowhowlab.osgi</groupId>
+        <artifactId>shell</artifactId>
+        <version>1.1.1-SNAPSHOT</version>
     </parent>
 
     <groupId>org.knowhowlab.osgi.shell</groupId>
@@ -14,6 +14,7 @@
     <packaging>bundle</packaging>
     <name>KnowHowLab OSGi Shell - Equinox console adapter</name>
     <description>KnowHowLab OSGi Shell - Equinox console adapter</description>
+
     <url>http://knowhowlab.org</url>
 
     <developers>
@@ -35,28 +36,14 @@
         </license>
     </licenses>
 
-    <issueManagement>
-        <system>Google</system>
-        <url>http://code.google.com/p/osgilab/issues</url>
-    </issueManagement>
-
-    <scm>
-        <url>https://osgilab.googlecode.com/svn/trunk/org.knowhowlab.osgi/shell/equinox</url>
-        <connection>scm:svn:https://osgilab.googlecode.com/svn/trunk/org.knowhowlab.osgi/shell/equinox</connection>
-        <developerConnection>scm:svn:https://osgilab.googlecode.com/svn/trunk/org.knowhowlab.osgi/shell/equinox
-        </developerConnection>
-    </scm>
-
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
-            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.compendium</artifactId>
-            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.osgi</groupId>
@@ -73,17 +60,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.0.1</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -103,56 +81,6 @@
                     </instructions>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.1</version>
-                <configuration>
-                    <tagBase>https://osgilab.googlecode.com/svn/tags/</tagBase>
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.0</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
