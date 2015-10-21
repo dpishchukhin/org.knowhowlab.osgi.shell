@@ -5,6 +5,8 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -32,6 +34,7 @@ public class Activator implements BundleActivator {
             "(" + GROUP_ID_PROPERTY + "=*)" +
             ")";
 
+    private static final String SUFFIX_PROPERTY = "org.knowhowlab.osgi.shell.suffix";
 
     /**
      * Bundle Context instance
@@ -80,6 +83,8 @@ public class Activator implements BundleActivator {
      * Command provides service tracker customizer
      */
     private class ShellCommandsCustomizer implements ServiceTrackerCustomizer {
+        private SecureRandom random = new SecureRandom();
+
         public Object addingService(ServiceReference reference) {
             Object groupId = reference.getProperty(GROUP_ID_PROPERTY);
             // if property value null or not String - ignore service
@@ -126,8 +131,10 @@ public class Activator implements BundleActivator {
                     props.put("osgi.command.scope", groupId);
                     props.put("osgi.command.function", commandMap.keySet().toArray(new String[commandMap.size()]));
                     try {
+                        String suffix = generateSuffix();
+                        props.put(SUFFIX_PROPERTY, suffix);
                         // generate class
-                        Object commandsProvider = FelixGogoCommandsServiceGenerator.generate(service, commandMap, serviceId.toString());
+                        Object commandsProvider = FelixGogoCommandsServiceGenerator.generate(service, commandMap, suffix);
                         commandRegistrations.put(reference,
                                 bc.registerService(commandsProvider.getClass().getName(), commandsProvider, props));
                     } catch (Exception e) {
@@ -138,6 +145,10 @@ public class Activator implements BundleActivator {
                     return null;
                 }
             }
+        }
+
+        private String generateSuffix() {
+            return new BigInteger(130, random).toString(32);
         }
 
         private String[][] parseCommands(Object commandsDescription) {
@@ -165,11 +176,12 @@ public class Activator implements BundleActivator {
         public void removedService(ServiceReference reference, Object service) {
             // unregister CommandGroup services that belongs to this service registration
             Long serviceId = (Long) reference.getProperty(Constants.SERVICE_ID);
-            // detach class
-            FelixGogoCommandsServiceGenerator.clean(serviceId.toString());
             ServiceRegistration registration = commandRegistrations.remove(reference);
             if (registration != null) {
+                String suffix = (String) registration.getReference().getProperty(SUFFIX_PROPERTY);
                 registration.unregister();
+                // detach class
+                FelixGogoCommandsServiceGenerator.clean(suffix);
             }
             bc.ungetService(reference);
         }
