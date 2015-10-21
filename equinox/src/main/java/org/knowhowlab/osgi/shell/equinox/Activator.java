@@ -22,6 +22,8 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -48,6 +50,8 @@ public class Activator implements BundleActivator {
             "(" + COMMANDS_DESCRIPTION_PROPERTY + "=*)" +
             "(" + GROUP_NAME_PROPERTY + "=*)" +
             ")";
+
+    private static final String SUFFIX_PROPERTY = "org.knowhowlab.osgi.shell.suffix";
 
     /**
      * Bundle Context instance
@@ -95,6 +99,8 @@ public class Activator implements BundleActivator {
      * Command provides service tracker customizer
      */
     private class ShellCommandsCustomizer implements ServiceTrackerCustomizer {
+        private SecureRandom random = new SecureRandom();
+
         public Object addingService(ServiceReference reference) {
             Object groupName = reference.getProperty(GROUP_NAME_PROPERTY);
             // if property value null or not String - ignore service
@@ -134,14 +140,15 @@ public class Activator implements BundleActivator {
                 if (!commandMap.isEmpty()) {
                     Dictionary<String, Object> props = new Hashtable<String, Object>();
                     Integer ranking = (Integer) reference.getProperty(Constants.SERVICE_RANKING);
-                    Long serviceId = (Long) reference.getProperty(Constants.SERVICE_ID);
                     if (ranking != null) {
                         props.put(Constants.SERVICE_RANKING, ranking);
                     }
                     try {
+                        String suffix = generateSuffix();
+                        props.put(SUFFIX_PROPERTY, suffix);
                         // generate class
                         Object commandsProvider = EquinoxCommandProviderGenerator.generate(service, (String) groupName,
-                                commandMap, serviceId.toString());
+                                commandMap, suffix);
                         commandRegistrations.put(reference,
                                 bc.registerService(CommandProvider.class.getName(), commandsProvider, props));
                     } catch (Exception e) {
@@ -152,6 +159,10 @@ public class Activator implements BundleActivator {
                     return null;
                 }
             }
+        }
+
+        private String generateSuffix() {
+            return new BigInteger(130, random).toString(32);
         }
 
         private String[][] parseCommands(Object commandsDescription) {
@@ -181,11 +192,12 @@ public class Activator implements BundleActivator {
             Long serviceId = (Long) reference.getProperty(Constants.SERVICE_ID);
             ServiceRegistration registration = commandRegistrations.remove(reference);
             if (registration != null) {
+                String suffix = (String) registration.getReference().getProperty(SUFFIX_PROPERTY);
                 registration.unregister();
+                // detach class
+                EquinoxCommandProviderGenerator.clean(suffix);
             }
             bc.ungetService(reference);
-            // detach class
-            EquinoxCommandProviderGenerator.clean(serviceId.toString());
         }
     }
 }
