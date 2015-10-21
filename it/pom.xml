@@ -19,6 +19,9 @@
     <modules>
         <module>it-test-bundle</module>
         <module>it-equinox</module>
+        <module>it-felix</module>
+        <module>it-felix-gogo</module>
+        <module>it-knopflerfish</module>
     </modules>
 
     <properties>
