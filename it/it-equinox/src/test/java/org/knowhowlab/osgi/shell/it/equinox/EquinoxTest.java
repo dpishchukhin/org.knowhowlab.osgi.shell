@@ -39,11 +39,11 @@ public class EquinoxTest {
 
                 mavenBundle().groupId("org.knowhowlab.osgi.shell")
                         .artifactId("equinox").
-                        version("1.1.1-SNAPSHOT").start(),
+                        version(System.getProperty("project.version")).start(),
 
                 mavenBundle().groupId("org.knowhowlab.osgi.shell.it")
                         .artifactId("it-test-bundle").
-                        version("1.1.1-SNAPSHOT").noStart(),
+                        version(System.getProperty("project.version")).noStart(),
                 junitBundles()
         );
     }

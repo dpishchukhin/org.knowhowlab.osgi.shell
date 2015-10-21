@@ -39,7 +39,7 @@ public class KnopflerfishTest {
 
                 mavenBundle().groupId("org.knowhowlab.osgi.shell")
                         .artifactId("knopflerfish").
-                        version("1.1.1-SNAPSHOT").start(),
+                        version(System.getProperty("project.version")).start(),
 
                 mavenBundle().groupId("org.knopflerfish.bundle")
                         .artifactId("console-API").
@@ -47,7 +47,7 @@ public class KnopflerfishTest {
 
                 mavenBundle().groupId("org.knowhowlab.osgi.shell.it")
                         .artifactId("it-test-bundle").
-                        version("1.1.1-SNAPSHOT").noStart(),
+                        version(System.getProperty("project.version")).noStart(),
                 junitBundles()
         );
     }
