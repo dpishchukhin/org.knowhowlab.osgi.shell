@@ -72,12 +72,7 @@
                             !com.sun.jdi*
                         </Import-Package>
                         <Bundle-Activator>org.knowhowlab.osgi.shell.equinox.Activator</Bundle-Activator>
-                        <Bundle-License>http://code.google.com/p/osgilab/wiki/License</Bundle-License>
-                        <Bundle-RequiredExecutionEnvironment>J2SE-1.5</Bundle-RequiredExecutionEnvironment>
                         <Embed-Dependency>*;artifactId=javassist;inline=false</Embed-Dependency>
-                        <_removeheaders>Bnd-LastModified, Built-By, Private-Package, Tool,
-                            Build-Jdk, Include-Resource, Embed-Dependency
-                        </_removeheaders>
                     </instructions>
                 </configuration>
             </plugin>

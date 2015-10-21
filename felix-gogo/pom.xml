@@ -67,11 +67,7 @@
                         <Export-Package />
                         <Import-Package>org.osgi*,org.apache.felix.service.command;version="[0.6.0,1)";status=provisional;mandatory:=status,!com.sun.jdi*</Import-Package>
                         <Bundle-Activator>org.knowhowlab.osgi.shell.felixgogo.Activator</Bundle-Activator>
-                        <Bundle-License>http://code.google.com/p/osgilab/wiki/License</Bundle-License>
-                        <Bundle-RequiredExecutionEnvironment>J2SE-1.5</Bundle-RequiredExecutionEnvironment>
                         <Embed-Dependency>*;artifactId=javassist;inline=false</Embed-Dependency>
-                        <_removeheaders>Bnd-LastModified, Built-By, Private-Package, Tool, Build-Jdk, Include-Resource
-                        </_removeheaders>
                     </instructions>
                 </configuration>
             </plugin>

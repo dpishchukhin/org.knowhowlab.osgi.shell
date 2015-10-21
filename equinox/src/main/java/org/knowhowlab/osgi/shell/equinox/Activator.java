@@ -179,13 +179,13 @@ public class Activator implements BundleActivator {
         public void removedService(ServiceReference reference, Object service) {
             // unregister CommandGroup services that belongs to this service registration
             Long serviceId = (Long) reference.getProperty(Constants.SERVICE_ID);
-            // detach class
-            EquinoxCommandProviderGenerator.clean(serviceId.toString());
             ServiceRegistration registration = commandRegistrations.remove(reference);
             if (registration != null) {
                 registration.unregister();
             }
             bc.ungetService(reference);
+            // detach class
+            EquinoxCommandProviderGenerator.clean(serviceId.toString());
         }
     }
 }

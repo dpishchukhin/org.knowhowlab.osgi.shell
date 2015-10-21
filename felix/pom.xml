@@ -60,10 +60,6 @@
                 <configuration>
                     <instructions>
                         <Bundle-Activator>org.knowhowlab.osgi.shell.felix.Activator</Bundle-Activator>
-                        <Bundle-License>http://code.google.com/p/osgilab/wiki/License</Bundle-License>
-                        <Bundle-RequiredExecutionEnvironment>J2SE-1.5</Bundle-RequiredExecutionEnvironment>
-                        <_removeheaders>Bnd-LastModified, Built-By, Private-Package, Tool, Build-Jdk, Include-Resource
-                        </_removeheaders>
                     </instructions>
                 </configuration>
             </plugin>
