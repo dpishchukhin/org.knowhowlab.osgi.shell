@@ -40,7 +40,9 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
 
 ### Implement shell command 
 
+```java
     public void <command_name>(java.io.PrintWriter out, java.lang.String[] args);
+```
 
 ### Register services with BundleContext
 
