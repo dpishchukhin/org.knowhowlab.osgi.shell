@@ -2,7 +2,7 @@
 
 Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native, Felix GoGo, Knopflerfish)
 
-[![Build Status](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell.svg?branch=master)](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell)
+[![Build Status](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell.svg?branch=master)](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell) [![Coverage Status](https://coveralls.io/repos/knowhowlab/org.knowhowlab.osgi.shell/badge.svg?branch=master&service=github)](https://coveralls.io/github/knowhowlab/org.knowhowlab.osgi.shell?branch=master)
 
 ### Blog with more samples and tutorials
 
