@@ -2,7 +2,7 @@
 
 Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native, Felix GoGo, Knopflerfish)
 
-[![Build Status](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell.svg?branch=master)](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell)
+[![Build Status](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell.svg?branch=master)](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell) [![Coverage Status](https://coveralls.io/repos/knowhowlab/org.knowhowlab.osgi.shell/badge.svg?branch=master&service=github)](https://coveralls.io/github/knowhowlab/org.knowhowlab.osgi.shell?branch=master)
 
 ### Blog with more samples and tutorials
 
@@ -12,6 +12,7 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
 
 ### Maven artifacts:
 
+```xml
     <dependency>
         <groupId>org.knowhowlab.osgi.shell</groupId>
         <artifactId>org.knowhowlab.osgi.shell.equinox</artifactId>
@@ -35,10 +36,13 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
         <artifactId>org.knowhowlab.osgi.shell.knopflerfish</artifactId>
         <version>1.3.0</version>
     </dependency>
+```
 
 ### Implement shell command 
 
+```java
     public void <command_name>(java.io.PrintWriter out, java.lang.String[] args);
+```
 
 ### Register services with BundleContext
 
@@ -58,6 +62,7 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
 
 ### Command implementation
 
+```java
     public class ShellTestService {
     ................
         public void bndinfo(PrintWriter out, String... args) {
@@ -86,9 +91,11 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
         }
     ......................
     }
-    
+```
+
 ### Command service registration
-    
+
+```java    
     ShellTestService shellTestService = ....;
     Dictionary<String, Object> props = new Hashtable<String, Object>();
     props.put("org.knowhowlab.osgi.shell.group.id", "test_group_id");
@@ -98,9 +105,10 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
     commandsArray[1] = new String[]{"bndsinfo", "bndsinfo - Print information for all bundles"};
     props.put("org.knowhowlab.osgi.shell.commands", commandsArray);
     bc.registerService(ShellTestService.class.getName(), shellTestService, props);
-    
+```    
 ### Command service registration with DS
-    
+
+```xml    
     <?xml version="1.0" encoding="UTF-8"?>
     <component name="shell_test.component">
         <implementation class="...ShellTestService"/>
@@ -117,3 +125,4 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
         </property>
     ...
     </component>
+```
