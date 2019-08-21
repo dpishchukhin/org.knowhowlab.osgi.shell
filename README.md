@@ -4,6 +4,8 @@ Adapts shell commands to all popular OSGi shell runtimes (Equinox, Felix Native,
 
 [![Build Status](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell.svg?branch=master)](https://travis-ci.org/knowhowlab/org.knowhowlab.osgi.shell) [![Coverage Status](https://coveralls.io/repos/knowhowlab/org.knowhowlab.osgi.shell/badge.svg?branch=master&service=github)](https://coveralls.io/github/knowhowlab/org.knowhowlab.osgi.shell?branch=master)
 
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dimi)
+
 ### Blog with more samples and tutorials
 
 [http://knowhowlab.org](http://knowhowlab.org)
